@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clock</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
     <style>
         body {
             height: 90vh;
@@ -15,15 +17,16 @@
         }
         .clock_box {
             /* border: 1px solid black; */
-            width: 300px;
-            height: 300px;
+            width: 350px;
+            height: 350px;
             text-align: center;
+            border-radius: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             /* align-items: center; */
             font-family: monospace;
-            filter: drop-shadow(-0px -0px 5px rgb(14, 1, 61));
+            filter: drop-shadow(-0px -0px 5px rgb(0, 0, 2));
         }
         #date {
             font-size: 20px;
@@ -39,6 +42,11 @@
             color: black;
             /* border: 1px solid black; */
         }
+        #switch {
+            margin-top: 20px;
+            font-size: 30px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -46,6 +54,11 @@
     <div class="clock_box">
         <p id="date">00</p>
         <p id="time">00</p>
+        <input type="checkbox" id="switch" onchange="toggleDarkMode()">
+        <!-- <div id="switch" onclick="toggleDarkMode()">
+        </div> -->
+        <i class="bi bi-lightbulb"></i>
+        
     </div>
     
     <script>
@@ -72,6 +85,26 @@
 
         updateTime();
         setInterval(updateTime, 1000);
+
+        function toggleDarkMode() {
+                const body = document.body;
+                const clockBox = document.querySelector('.clock_box');
+                const switchInput = document.getElementById('switch');
+                
+                if (switchInput.checked) {
+                    body.style.backgroundColor = '#333';
+                    clockBox.style.backgroundColor = '#555';
+                    date.style.color = 'white';
+                    time.style.color = 'white';
+                } else {
+                    body.style.backgroundColor = 'white';
+                    clockBox.style.backgroundColor = 'lightgray';
+                    date.style.color = 'black';
+                    time.style.color = 'black';
+                }
+                setInterval(updateTime, 1000);
+            }
+            toggleDarkMode();
     </script>
 </body>
 </html>
