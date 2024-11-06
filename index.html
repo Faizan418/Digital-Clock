@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <style>
+        body {
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* text-align: center; */
+            /* border: 1px solid black; */
+        }
+        .clock_box {
+            /* border: 1px solid black; */
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* align-items: center; */
+            font-family: monospace;
+            filter: drop-shadow(-0px -0px 5px rgb(14, 1, 61));
+        }
+        #date {
+            font-size: 20px;
+            /* font-weight: bold; */
+            margin-bottom: 40px;
+            color: black;
+            /* border: 1px solid black; */
+        }
+        #time {
+            font-size: 50px;
+            /* font-weight: bold; */
+            margin: 0;
+            color: black;
+            /* border: 1px solid black; */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="clock_box">
+        <p id="date">00</p>
+        <p id="time">00</p>
+    </div>
+    
+    <script>
+        const Week = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+        function updateTime() {
+            const date = new Date();
+
+            document.getElementById('date').innerText =
+                date.getFullYear() + "-" +
+                zeroPadding(date.getMonth() + 1, 2) + "-" +
+                zeroPadding(date.getDate(), 2) + "/" +
+                Week[date.getDay()];
+
+            document.getElementById('time').innerText =
+                zeroPadding(date.getHours(), 2) + ":" +
+                zeroPadding(date.getMinutes(), 2) + ":" +
+                zeroPadding(date.getSeconds(), 2);
+        }
+
+        function zeroPadding(num, digit) {
+            return String(num).padStart(digit, "12");
+        }
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
